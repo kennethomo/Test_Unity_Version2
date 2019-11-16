@@ -12,6 +12,7 @@ public class EnemyStateMachine : MonoBehaviour
 {
     private BattleStateMachine BSM;
     public BaseEnemy enemy;
+    public Animator anim;
 
     public enum TurnState
     {
@@ -45,6 +46,7 @@ public class EnemyStateMachine : MonoBehaviour
         Selector.SetActive(false);
         BSM = GameObject.Find("BattleManager").GetComponent<BattleStateMachine>();
         startPosition = transform.position;
+        anim = GetComponent<Animator>();
     }
 
     void Update()

@@ -12,7 +12,8 @@ using UnityEngine.UI;
 public class HeroStateMachine : MonoBehaviour
 {
     private BattleStateMachine BSM;
-    public BaseHero hero; 
+    public BaseHero hero;
+    public Animator anim;//need this to access anim
 
     public enum TurnState
     {
@@ -47,6 +48,8 @@ public class HeroStateMachine : MonoBehaviour
         Selector.SetActive(false);
         BSM = GameObject.Find("BattleManager").GetComponent<BattleStateMachine>();
         currentState = TurnState.PROCESSING;
+        anim = GetComponent<Animator>();//Added anim comp
+
     }
 
     void Update()
@@ -93,9 +96,11 @@ public class HeroStateMachine : MonoBehaviour
 
         actionStarted = true;
         //animate the enemy near the hero to attack
+        anim.Play("metarig|Run");//run anim to start 
         Vector3 heroPosition = new Vector3(EnemyToAttack.transform.position.x-1.5f, EnemyToAttack.transform.position.y, EnemyToAttack.transform.position.z);
+        
         while (MoveTowardsEnemy(heroPosition)) { yield return null; }
-
+        
         //wait a bit
         yield return new WaitForSeconds(0.5f);
 

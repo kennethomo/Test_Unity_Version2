@@ -12,6 +12,7 @@ using UnityEngine.UI;
 public class HeroStateMachine : MonoBehaviour
 {
     private BattleStateMachine BSM;
+    private EnemyStateMachine ESM;
     public BaseHero hero;
     public Animator anim;//need this to access anim
 
@@ -36,6 +37,7 @@ public class HeroStateMachine : MonoBehaviour
     private Vector3 startPosition;
     private float animSpeed = 10f;
     //when hero dies
+  
    
     
 
@@ -98,11 +100,12 @@ public class HeroStateMachine : MonoBehaviour
         //animate the enemy near the hero to attack
         anim.Play("metarig|Run");//run anim to start 
         Vector3 heroPosition = new Vector3(EnemyToAttack.transform.position.x-1.5f, EnemyToAttack.transform.position.y, EnemyToAttack.transform.position.z);
-        
+
+
         while (MoveTowardsEnemy(heroPosition)) { yield return null; }
         
         //wait a bit
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1.5f);
 
         //do damage
         doDamage();
@@ -173,5 +176,6 @@ public class HeroStateMachine : MonoBehaviour
         hero.curHP -= damageTaken;
         Debug.Log("Hero has taken " + damageTaken + " damage, " + "with defence * random double " + rand);
     }
-    
+
+
 }

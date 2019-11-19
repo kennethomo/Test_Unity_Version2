@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.4494505, g: 0.49641168, b: 0.55895436, a: 1}
+  m_IndirectSpecularColor: {r: 0.44945085, g: 0.49641246, b: 0.558955, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -527,7 +527,7 @@ PrefabInstance:
     - target: {fileID: 224149140542544230, guid: d10f83f527f97ec4e9fc4258700c3c57,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 1.7000237
+      value: 1.7000275
       objectReference: {fileID: 0}
     - target: {fileID: 224149140542544230, guid: d10f83f527f97ec4e9fc4258700c3c57,
         type: 3}
@@ -1242,6 +1242,7 @@ GameObject:
   - component: {fileID: 1073230112}
   - component: {fileID: 1073230111}
   - component: {fileID: 1073230110}
+  - component: {fileID: 1073230114}
   m_Layer: 5
   m_Name: BattleCanvas
   m_TagString: Untagged
@@ -1332,6 +1333,25 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!95 &1073230114
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1073230109}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 22b862099057ba2479dc7b91f3d94736, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &1136581750
 PrefabInstance:
   m_ObjectHideFlags: 0

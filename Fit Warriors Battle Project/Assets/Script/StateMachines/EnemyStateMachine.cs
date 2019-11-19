@@ -34,9 +34,9 @@ public class EnemyStateMachine : MonoBehaviour
     //timeforaction stuff
     private bool actionStarted = false;
     public GameObject heroToAttack;
-    private float animSpeed = 10f; 
-    //is it the enemy turn?
-
+    private float animSpeed = 10f;
+    //When the game is over ENEMY DEAD
+    private bool dead = false; 
 
 
 
@@ -68,6 +68,7 @@ public class EnemyStateMachine : MonoBehaviour
             case (TurnState.DEAD):
                 GameObject performer = GameObject.Find("Enemy");
                 setDead();                             //set animation paramter for Dead to TRUE
+                dead = true; 
                 break;
             case (TurnState.WAITING):
                 //idle state
@@ -138,8 +139,13 @@ public class EnemyStateMachine : MonoBehaviour
 
     private bool MoveTowardsEnemy(Vector3 target)
     {
-        setWalking();   //set animation paramter for Walking to TRUE
-        return target != (transform.position = Vector3.MoveTowards(transform.position, target, animSpeed* Time.deltaTime));
+        if (!dead)
+        {
+            setWalking();   //set animation paramter for Walking to TRUE
+            return target != (transform.position = Vector3.MoveTowards(transform.position, target, animSpeed * Time.deltaTime));
+        }
+        else
+            return false;
     }
 
     private bool MoveTowardsStart(Vector3 target)

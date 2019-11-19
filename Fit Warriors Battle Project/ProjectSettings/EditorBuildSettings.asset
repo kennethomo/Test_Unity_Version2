@@ -8,3 +8,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/BattleScene.unity
     guid: a9e152907fb60634b8f8b61871aeebe4
+  - enabled: 1
+    path: Assets/FitWarriors.unity
+    guid: 9c700a567a0acdc49b9923a29039175a
+  m_configObjects: {}

@@ -47,6 +47,7 @@ public class EnemyStateMachine : MonoBehaviour
         BSM = GameObject.Find("BattleManager").GetComponent<BattleStateMachine>();
         startPosition = transform.position;
         anim = GetComponent<Animator>();
+        setAllAnimatorsFalse();   //set all animation parameters false
     }
 
     void Update()
@@ -66,14 +67,15 @@ public class EnemyStateMachine : MonoBehaviour
                 break;
             case (TurnState.DEAD):
                 GameObject performer = GameObject.Find("Enemy");
-                performer.SetActive(false);
-                Time.timeScale = 0;
+                setDead();                             //set animation paramter for Dead to TRUE
                 break;
             case (TurnState.WAITING):
                 //idle state
+                setTakingDamage();                     //This state is when the enemy is sitting still waiting to be hit, so we set animation paramter for Damage to TRUE
                 break;
             case (TurnState.ACTION):
-                StartCoroutine(TimeForAction()); 
+                StartCoroutine(TimeForAction());
+                setAttacking();                       //set animation paramter for Attack to TRUE
                 break;
         }
     }
@@ -113,7 +115,7 @@ public class EnemyStateMachine : MonoBehaviour
         while (MoveTowardsEnemy(enemyPosition)) {yield return null;}
 
         //wait a bit
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1.5f);
 
         //do damage
         doDamage();
@@ -136,11 +138,13 @@ public class EnemyStateMachine : MonoBehaviour
 
     private bool MoveTowardsEnemy(Vector3 target)
     {
+        setWalking();   //set animation paramter for Walking to TRUE
         return target != (transform.position = Vector3.MoveTowards(transform.position, target, animSpeed* Time.deltaTime));
     }
 
     private bool MoveTowardsStart(Vector3 target)
     {
+        setIdle();      //set animation paramter for Idle to TRUE
         return target != (transform.position = Vector3.MoveTowards(transform.position, target, animSpeed * Time.deltaTime));
     }
 
@@ -168,7 +172,60 @@ public class EnemyStateMachine : MonoBehaviour
                     new Vector3(Mathf.Clamp(0, 0, 1), ProgressBar.transform.localScale.y, ProgressBar.transform.localScale.z);
             }
         }
-
-
     }
+
+    private void setAttacking()
+    {
+        anim.SetBool("isAttacking", true);
+        anim.SetBool("isWalking", false);
+        anim.SetBool("isDead", false);
+        anim.SetBool("isTakingDamage", false);
+        anim.SetBool("isIdle", false);
+    }
+
+    private void setWalking()
+    {
+        anim.SetBool("isAttacking", false);
+        anim.SetBool("isWalking", true);
+        anim.SetBool("isDead", false);
+        anim.SetBool("isTakingDamage", false);
+        anim.SetBool("isIdle", false);
+    }
+
+    private void setDead()
+    {
+        anim.SetBool("isAttacking", false);
+        anim.SetBool("isWalking", false);
+        anim.SetBool("isDead", true);
+        anim.SetBool("isTakingDamage", false);
+        anim.SetBool("isIdle", false);
+    }
+
+    private void setIdle()
+    {
+        anim.SetBool("isAttacking", false);
+        anim.SetBool("isWalking", false);
+        anim.SetBool("isDead", false);
+        anim.SetBool("isTakingDamage", false);
+        anim.SetBool("isIdle", true);
+    }
+
+    public void setTakingDamage()
+    {
+        anim.SetBool("isAttacking", false);
+        anim.SetBool("isWalking", false);
+        anim.SetBool("isDead", false);
+        anim.SetBool("isTakingDamage", true);
+        anim.SetBool("isIdle", true);
+    }
+
+    private void setAllAnimatorsFalse()
+    {
+        anim.SetBool("isAttacking", false);
+        anim.SetBool("isWalking", false);
+        anim.SetBool("isDead", false);
+        anim.SetBool("isTakingDamage", false);
+        anim.SetBool("isIdle", true);
+    }
+
 }
